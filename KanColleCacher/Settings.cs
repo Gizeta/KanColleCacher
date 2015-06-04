@@ -114,6 +114,7 @@ namespace d_f_32.KanColleCacher
                 _CacheEnabled = true;
                 _HackEnabled = true;
                 _HackTitleEnabled = true;
+                _HackMusicRequestEnabled = false;
 
                 _CacheEntryFiles = 2;
                 _CachePortFiles = 2;
@@ -182,6 +183,21 @@ namespace d_f_32.KanColleCacher
                 if (this._HackTitleEnabled != value)
                 {
                     this._HackTitleEnabled = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        private bool _HackMusicRequestEnabled;
+		[ExportMetadata("Comment", "启用针对点唱机api请求的特殊规则")]
+		public bool HackMusicRequestEnabled
+        {
+            get { return this._HackMusicRequestEnabled; }
+            set
+            {
+                if (this._HackMusicRequestEnabled != value)
+                {
+                    this._HackMusicRequestEnabled = value;
                     this.RaisePropertyChanged();
                 }
             }

@@ -158,6 +158,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
             <StackPanel>
@@ -288,6 +290,21 @@
 
             <!--第五区块-->
             <StackPanel Grid.Row="4">
+                <CheckBox Content="免费点唱机" 
+                      Margin="10,10,0,0" 
+                      IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
+                      IsChecked="{Binding Current.HackMusicRequestEnabled, Mode=TwoWay}"/>
+                <TextBlock Margin="31,10,0,0" 
+                       TextWrapping="Wrap" 
+                       Style="{StaticResource DetailTextBlock}">
+                <Run Text="※ 点唱机点歌将不会消耗家具币"/>
+                </TextBlock>
+                <Border Style="{StaticResource BorderStyle}" />
+            </StackPanel>
+
+
+            <!--第六区块-->
+            <StackPanel Grid.Row="5">
                 <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
@@ -309,6 +326,30 @@
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
 
+
+            <!--第七区块-->
+            <StackPanel Grid.Row="6">
+                <Label Content="清除缓存" Margin="10,10,0,0" Padding="0" Foreground="White"/>
+                <TextBlock TextWrapping="Wrap"
+                           Margin="30,10,0,0" 
+                           Style="{StaticResource DetailTextBlock}">
+                    <Run Text="※ 清除魔改缓存将只会清除符合Hack规则的资源缓存"/>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="30,10,0,0"
+                        Padding="10,3"
+                        HorizontalAlignment="Left"
+                        Content="清除魔改缓存"
+                        Click="CleanModifiedCache_Click"/>
+                    <Button Margin="50,10,0,0"
+                        Padding="10,3"
+                        HorizontalAlignment="Left"
+                        Content="清除全部缓存"
+                        Click="CleanCache_Click"/>
+                </StackPanel>
+                <Border Style="{StaticResource BorderStyle}" />
+            </StackPanel>
+            
         </Grid>        
     </ScrollViewer>
 </UserControl>

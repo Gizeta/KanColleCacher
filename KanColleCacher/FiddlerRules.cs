@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Fiddler;
 using Debug = System.Diagnostics.Debug;
+using Gizeta.KanColleCacher;
 
 namespace d_f_32.KanColleCacher
 {
@@ -19,11 +20,15 @@ namespace d_f_32.KanColleCacher
     class FiddlerRules
     {
         static CacheCore cache;
+        static GraphModifier modifier;
+        static RespHacker hacker;
 		
 		static public void Initialize ()
 		{
 			cache = new CacheCore();
-			
+			modifier = new GraphModifier();
+            hacker = new RespHacker();
+            
 			_AppendToFiddler();
 		}
 		
