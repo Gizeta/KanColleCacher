@@ -160,6 +160,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
             <StackPanel>
@@ -290,6 +291,21 @@
 
             <!--第五区块-->
             <StackPanel Grid.Row="4">
+                <CheckBox Content="开启全图鉴" 
+                      Margin="10,10,0,0" 
+                      IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
+                      IsChecked="{Binding Current.HackBookEnabled, Mode=TwoWay}"/>
+                <TextBlock Margin="31,10,0,0" 
+                       TextWrapping="Wrap" 
+                       Style="{StaticResource DetailTextBlock}">
+                <Run Text="※ 解锁全部舰娘与装备图鉴内容（包括结婚）"/>
+                </TextBlock>
+                <Border Style="{StaticResource BorderStyle}" />
+            </StackPanel>
+            
+
+            <!--第六区块-->
+            <StackPanel Grid.Row="5">
                 <CheckBox Content="免费点唱机" 
                       Margin="10,10,0,0" 
                       IsEnabled="{Binding IsChecked, ElementName=CheckBox_CacheEnabled}" 
@@ -303,8 +319,8 @@
             </StackPanel>
 
 
-            <!--第六区块-->
-            <StackPanel Grid.Row="5">
+            <!--第七区块-->
+            <StackPanel Grid.Row="6">
                 <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
@@ -327,8 +343,8 @@
             </StackPanel>
 
 
-            <!--第七区块-->
-            <StackPanel Grid.Row="6">
+            <!--第八区块-->
+            <StackPanel Grid.Row="7">
                 <Label Content="清除缓存" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 

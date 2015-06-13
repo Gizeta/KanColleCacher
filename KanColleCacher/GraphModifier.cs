@@ -134,6 +134,10 @@ namespace Gizeta.KanColleCacher
             {
                 this.Data.Add("ship_name", parser["info"]["ship_name"]);
             }
+            else
+            {
+                this.Data.Add("ship_name", null);
+            }
             if (parser["graph"] != null)
             {
                 var modList = new string[] { "boko_n", "boko_d",

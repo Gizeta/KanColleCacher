@@ -114,6 +114,7 @@ namespace d_f_32.KanColleCacher
                 _CacheEnabled = true;
                 _HackEnabled = true;
                 _HackTitleEnabled = true;
+                _HackBookEnabled = false;
                 _HackMusicRequestEnabled = false;
 
                 _CacheEntryFiles = 2;
@@ -183,6 +184,21 @@ namespace d_f_32.KanColleCacher
                 if (this._HackTitleEnabled != value)
                 {
                     this._HackTitleEnabled = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        private bool _HackBookEnabled;
+		[ExportMetadata("Comment", "启用全图鉴功能")]
+		public bool HackBookEnabled
+        {
+            get { return this._HackBookEnabled; }
+            set
+            {
+                if (this._HackBookEnabled != value)
+                {
+                    this._HackBookEnabled = value;
                     this.RaisePropertyChanged();
                 }
             }

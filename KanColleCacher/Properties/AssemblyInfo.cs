@@ -44,7 +44,7 @@ namespace d_f_32.KanColleCacher
 	{
 
 		public const string Name = "KanColleCacher";
-		public const string Version = "2.2.0.28";
+		public const string Version = "2.2.1.31";
 		public const string Author = "d.f.32";
 		public const string Copyright = "©2014 - d.f.32";
 #if DEBUG
