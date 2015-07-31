@@ -28,16 +28,46 @@ namespace d_f_32.KanColleCacher
 			StringBuilder content = new StringBuilder();
 
 			content.AppendFormat(
-				"{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\r\n",
+				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
 				"SortNo", "ShipId", "ShipName",
 				"FileName", "FileVersion",
-				"TypeName",  "TypeId"
+				"TypeName",  "TypeId",
+                "boko_n_left", "boko_n_top",
+                "boko_d_left", "boko_d_top",
+                "map_n_left", "map_n_top",
+                "map_d_left", "map_d_top",
+                "battle_n_left", "battle_n_top",
+                "battle_d_left", "battle_d_top",
+                "ensyuf_n_left", "ensyuf_n_top",
+                "ensyuf_d_left", "ensyuf_d_top",
+                "ensyue_n_left", "ensyue_n_top",
+                "kaizo_n_left", "kaizo_n_top",
+                "kaizo_d_left", "kaizo_d_top",
+                "kaisyu_n_left", "kaisyu_n_top",
+                "kaisyu_d_left", "kaisyu_d_top",
+                "weda_left", "weda_top",
+                "wedb_left", "wedb_top"
 				);
 			content.AppendFormat(
-				"{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\r\n",
+				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
 				"序号", "ID", "名称",
-				"文件名", "文件版本", "文件序号",
-				"类型", "类型序号", "类型ID"
+				"文件名", "文件版本",
+				"类型",  "类型ID",
+                "boko_n_left", "boko_n_top",
+                "boko_d_left", "boko_d_top",
+                "map_n_left", "map_n_top",
+                "map_d_left", "map_d_top",
+                "battle_n_left", "battle_n_top",
+                "battle_d_left", "battle_d_top",
+                "ensyuf_n_left", "ensyuf_n_top",
+                "ensyuf_d_left", "ensyuf_d_top",
+                "ensyue_n_left", "ensyue_n_top",
+                "kaizo_n_left", "kaizo_n_top",
+                "kaizo_d_left", "kaizo_d_top",
+                "kaisyu_n_left", "kaisyu_n_top",
+                "kaisyu_d_left", "kaisyu_d_top",
+                "weda_left", "weda_top", 
+                "wedb_left", "wedb_top"
 				);
 			try
 			{
@@ -64,10 +94,25 @@ namespace d_f_32.KanColleCacher
 			graphList.ForEach(x =>
 				{
 					content.AppendFormat(
-						"{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\r\n",
+						"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
 						x.ship_sortno, x.ship_id, x.ship_name,
 						x.ship_filename, x.ship_version,
-						x.ship_type_name, x.ship_type_id
+						x.ship_type_name, x.ship_type_id,
+                        x.ship_graph_boko_n_left, x.ship_graph_boko_n_top, 
+                        x.ship_graph_boko_d_left, x.ship_graph_boko_d_top,
+                        x.ship_graph_map_n_left, x.ship_graph_map_n_top,
+                        x.ship_graph_map_d_left, x.ship_graph_map_d_top,
+                        x.ship_graph_battle_n_left, x.ship_graph_battle_n_top,
+                        x.ship_graph_battle_d_left, x.ship_graph_battle_d_top,
+                        x.ship_graph_ensyuf_n_left, x.ship_graph_ensyuf_n_top,
+                        x.ship_graph_ensyuf_d_left, x.ship_graph_ensyuf_d_top,
+                        x.ship_graph_ensyue_n_left, x.ship_graph_ensyue_n_top,
+                        x.ship_graph_kaizo_n_left, x.ship_graph_kaizo_n_top,
+                        x.ship_graph_kaizo_d_left, x.ship_graph_kaizo_d_top,
+                        x.ship_graph_kaisyu_n_left, x.ship_graph_kaisyu_n_top,
+                        x.ship_graph_kaisyu_d_left, x.ship_graph_kaisyu_d_top,
+                        x.ship_graph_weda_left, x.ship_graph_weda_top,
+                        x.ship_graph_wedb_left, x.ship_graph_wedb_top
 					);
 				});
 
@@ -83,7 +128,7 @@ namespace d_f_32.KanColleCacher
 
 		/// <summary>
 		/// 解析 api_start2 数据信息
-		/// </summary>
+		/// </summary>item.ship_graph_sortno
 		static void ParseSession(Session oSession)
 		{
 			SvData<kcsapi_start2> svd;
@@ -111,6 +156,36 @@ namespace d_f_32.KanColleCacher
 				item.ship_filename = _loc1.api_filename;
 				item.ship_version = _loc1.api_version;
 				item.ship_graph_sortno = _loc1.api_sortno;
+                item.ship_graph_boko_n_left = _loc1.api_boko_n[0];
+                item.ship_graph_boko_n_top = _loc1.api_boko_n[1];
+                item.ship_graph_boko_d_left = _loc1.api_boko_d[0];
+                item.ship_graph_boko_d_top = _loc1.api_boko_d[1];
+                item.ship_graph_map_n_left = _loc1.api_map_n[0];
+                item.ship_graph_map_n_top = _loc1.api_map_n[1];
+                item.ship_graph_map_d_left = _loc1.api_map_d[0];
+                item.ship_graph_map_d_top = _loc1.api_map_d[1];
+                item.ship_graph_battle_n_left = _loc1.api_battle_n[0];
+                item.ship_graph_battle_n_top = _loc1.api_battle_n[1];
+                item.ship_graph_battle_d_left = _loc1.api_battle_d[0];
+                item.ship_graph_battle_d_top = _loc1.api_battle_d[1];
+                item.ship_graph_ensyuf_n_left = _loc1.api_ensyuf_n[0];
+                item.ship_graph_ensyuf_n_top = _loc1.api_ensyuf_n[1];
+                item.ship_graph_ensyuf_d_left = _loc1.api_ensyuf_d[0];
+                item.ship_graph_ensyuf_d_top = _loc1.api_ensyuf_d[1];
+                item.ship_graph_ensyue_n_left = _loc1.api_ensyue_n[0];
+                item.ship_graph_ensyue_n_top = _loc1.api_ensyue_n[1];
+                item.ship_graph_kaizo_n_left = _loc1.api_kaizo_n[0];
+                item.ship_graph_kaizo_n_top = _loc1.api_kaizo_n[1];
+                item.ship_graph_kaizo_d_left = _loc1.api_kaizo_d[0];
+                item.ship_graph_kaizo_d_top = _loc1.api_kaizo_d[1];
+                item.ship_graph_kaisyu_n_left = _loc1.api_kaisyu_n[0];
+                item.ship_graph_kaisyu_n_top = _loc1.api_kaisyu_n[1];
+                item.ship_graph_kaisyu_d_left = _loc1.api_kaisyu_d[0];
+                item.ship_graph_kaisyu_d_top = _loc1.api_kaisyu_d[1];
+                item.ship_graph_weda_left = _loc1.api_weda[0];
+                item.ship_graph_weda_top = _loc1.api_weda[1];
+                item.ship_graph_wedb_left = _loc1.api_wedb[0];
+                item.ship_graph_wedb_top = _loc1.api_wedb[1];
 
 				if (mst_ship.ContainsKey(item.ship_id))
 				{
@@ -230,5 +305,35 @@ namespace d_f_32.KanColleCacher
 		public int ship_graph_sortno = 0;
 		public string ship_filename = "";
 		public string ship_version = "";
+        public int ship_graph_boko_n_left = 0;
+        public int ship_graph_boko_n_top = 0;
+        public int ship_graph_boko_d_left = 0;
+        public int ship_graph_boko_d_top = 0;
+        public int ship_graph_map_n_left = 0;
+        public int ship_graph_map_n_top = 0;
+        public int ship_graph_map_d_left = 0;
+        public int ship_graph_map_d_top = 0;
+        public int ship_graph_battle_n_left = 0;
+        public int ship_graph_battle_n_top = 0;
+        public int ship_graph_battle_d_left = 0;
+        public int ship_graph_battle_d_top = 0;
+        public int ship_graph_ensyuf_n_left = 0;
+        public int ship_graph_ensyuf_n_top = 0;
+        public int ship_graph_ensyuf_d_left = 0;
+        public int ship_graph_ensyuf_d_top = 0;
+        public int ship_graph_ensyue_n_left = 0;
+        public int ship_graph_ensyue_n_top = 0;
+        public int ship_graph_kaizo_n_left = 0;
+        public int ship_graph_kaizo_n_top = 0;
+        public int ship_graph_kaizo_d_left = 0;
+        public int ship_graph_kaizo_d_top = 0;
+        public int ship_graph_kaisyu_n_left = 0;
+        public int ship_graph_kaisyu_n_top = 0;
+        public int ship_graph_kaisyu_d_left = 0;
+        public int ship_graph_kaisyu_d_top = 0;
+        public int ship_graph_weda_left = 0;
+        public int ship_graph_weda_top = 0;
+        public int ship_graph_wedb_left = 0;
+        public int ship_graph_wedb_top = 0;
 	}
 }
