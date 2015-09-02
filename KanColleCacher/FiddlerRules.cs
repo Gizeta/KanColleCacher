@@ -58,7 +58,13 @@ namespace d_f_32.KanColleCacher
 			{
 				//返回本地文件
 				oSession.utilCreateResponseAndBypassServer();
-				oSession.ResponseBody = File.ReadAllBytes(filepath);
+                byte[] file;
+                using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    file = new byte[fs.Length];
+                    fs.Read(file, 0, (int)fs.Length);
+                }
+                oSession.ResponseBody = file;
 				_CreateResponseHeader(oSession, filepath);
 
 				//Debug.WriteLine("CACHR> 【返回本地】" + filepath);
@@ -92,8 +98,14 @@ namespace d_f_32.KanColleCacher
 				{
 					//服务器返回304，文件没有修改 -> 返回本地文件
 					oSession.bBufferResponse = true;
-					oSession.ResponseBody = File.ReadAllBytes(filepath);
-					oSession.oResponse.headers.HTTPResponseCode = 200;
+                    byte[] file;
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        file = new byte[fs.Length];
+                        fs.Read(file, 0, (int)fs.Length);
+                    }
+                    oSession.ResponseBody = file;
+                    oSession.oResponse.headers.HTTPResponseCode = 200;
 					oSession.oResponse.headers.HTTPResponseStatus = "200 OK";
 					oSession.oResponse.headers["Last-Modified"] = oSession.oRequest.headers["If-Modified-Since"];
 					oSession.oResponse.headers["Accept-Ranges"] = "bytes";

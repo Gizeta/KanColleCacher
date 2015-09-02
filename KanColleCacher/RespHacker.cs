@@ -40,6 +40,14 @@ namespace Gizeta.KanColleCacher
                 fs.Write(res, 0, res.Length);
                 fs.Close();
             }
+            else if (File.ReadAllLines(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat").Length < 242)
+            {
+                var res = new byte[Resources.picture_book_ext.Length];
+                Resources.picture_book_ext.CopyTo(res, 0);
+                var fs = new FileStream(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat", FileMode.Truncate, FileAccess.Write);
+                fs.Write(res, 0, res.Length);
+                fs.Close();
+            }
         }
 
         public void Dispose()
