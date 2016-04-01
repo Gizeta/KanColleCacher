@@ -20,7 +20,16 @@ namespace d_f_32.KanColleCacher
 		static public string GetAndRemove(string url)
 		{
 			string ret;
-			record.TryRemove(url, out ret);
+            if (url.Contains(".swf"))
+            {
+                // 大咪咪在remodel中发包请求资源有问题，固将swf的record保留 by AtrisMio @ 7d960e0
+                // 同一个swf文件连续请求多次，第一次请求后记录被删除，影响后续请求 by Gizeta
+                record.TryGetValue(url, out ret);
+            }
+            else
+            {
+                record.TryRemove(url, out ret);
+            }
 			return ret;
 		}
 		static public string Get(string url)
