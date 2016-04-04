@@ -28,9 +28,9 @@ namespace d_f_32.KanColleCacher
 			StringBuilder content = new StringBuilder();
 
 			content.AppendFormat(
-				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
+				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}\r\n",
 				"SortNo", "ShipId", "ShipName",
-				"FileName", "FileVersion",
+				"FileName",
 				"TypeName",  "TypeId",
                 "boko_n_left", "boko_n_top",
                 "boko_d_left", "boko_d_top",
@@ -49,9 +49,9 @@ namespace d_f_32.KanColleCacher
                 "wedb_left", "wedb_top"
 				);
 			content.AppendFormat(
-				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
+				"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}\r\n",
 				"序号", "ID", "名称",
-				"文件名", "文件版本",
+				"文件名",
 				"类型",  "类型ID",
                 "boko_n_left", "boko_n_top",
                 "boko_d_left", "boko_d_top",
@@ -94,9 +94,9 @@ namespace d_f_32.KanColleCacher
 			graphList.ForEach(x =>
 				{
 					content.AppendFormat(
-						"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35},{36}\r\n",
+						"{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}\r\n",
 						x.ship_sortno, x.ship_id, x.ship_name,
-						x.ship_filename, x.ship_version,
+						x.ship_filename,
 						x.ship_type_name, x.ship_type_id,
                         x.ship_graph_boko_n_left, x.ship_graph_boko_n_top, 
                         x.ship_graph_boko_d_left, x.ship_graph_boko_d_top,
@@ -154,7 +154,6 @@ namespace d_f_32.KanColleCacher
 
 				item.ship_id = _loc1.api_id;
 				item.ship_filename = _loc1.api_filename;
-				item.ship_version = _loc1.api_version;
 				item.ship_graph_sortno = _loc1.api_sortno;
                 item.ship_graph_boko_n_left = _loc1.api_boko_n[0];
                 item.ship_graph_boko_n_top = _loc1.api_boko_n[1];
@@ -304,7 +303,6 @@ namespace d_f_32.KanColleCacher
 
 		public int ship_graph_sortno = 0;
 		public string ship_filename = "";
-		public string ship_version = "";
         public int ship_graph_boko_n_left = 0;
         public int ship_graph_boko_n_top = 0;
         public int ship_graph_boko_d_left = 0;
