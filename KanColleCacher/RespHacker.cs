@@ -33,19 +33,19 @@ namespace Gizeta.KanColleCacher
             KanColleClient.Current.Proxy.api_start2.TryParse<kcsapi_start2>().Subscribe(x => initData = x.Data);
             KanColleClient.Current.Proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => fcoin = x.Data.api_fcoin);
 
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat"))
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat"))
             {
                 var res = new byte[Resources.picture_book_ext.Length];
                 Resources.picture_book_ext.CopyTo(res, 0);
-                var fs = new FileStream(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat", FileMode.Create, FileAccess.Write);
+                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat", FileMode.Create, FileAccess.Write);
                 fs.Write(res, 0, res.Length);
                 fs.Close();
             }
-            else if (File.ReadAllLines(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat").Length < 242)
+            else if (File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat").Length < 242)
             {
                 var res = new byte[Resources.picture_book_ext.Length];
                 Resources.picture_book_ext.CopyTo(res, 0);
-                var fs = new FileStream(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat", FileMode.Truncate, FileAccess.Write);
+                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat", FileMode.Truncate, FileAccess.Write);
                 fs.Write(res, 0, res.Length);
                 fs.Close();
             }
@@ -376,9 +376,9 @@ namespace Gizeta.KanColleCacher
 
         static PictureBookExt()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat"))
             {
-                var fs = new FileStream(Directory.GetCurrentDirectory() + @"\Plugins\picture_book_ext.dat", FileMode.Open);
+                var fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat", FileMode.Open);
                 var sr = new StreamReader(fs);
                 string line;
                 while ((line = sr.ReadLine()) != null)
