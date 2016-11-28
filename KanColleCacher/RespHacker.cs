@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Text.RegularExpressions;
+using kcsapi_start2 = Grabacr07.KanColleWrapper.Models.Raw.kcsapi_start2;
 
 namespace Gizeta.KanColleCacher
 {
