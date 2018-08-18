@@ -23,7 +23,7 @@ namespace Gizeta.KanColleCacher
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.BeforeResponse += FiddlerApplication_BeforeResponse;
 
-            var folder = new DirectoryInfo(Path.Combine(Settings.Current.CacheFolder, "kcs", "resources", "swf", "ships"));
+            var folder = new DirectoryInfo(Path.Combine(Settings.Current.CacheFolder, "kcs2", "resources", "ship"));
             if (folder.Exists)
             {
                 foreach (var file in folder.GetFiles())

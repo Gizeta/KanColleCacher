@@ -118,8 +118,7 @@ namespace d_f_32.KanColleCacher
                 _HackMusicRequestEnabled = false;
 
                 _CacheEntryFiles = 2;
-                _CachePortFiles = 2;
-                _CacheSceneFiles = 2;
+                _CacheCollectionFiles = 2;
                 _CacheResourceFiles = 2;
                 _CacheSoundFiles = 2;
 
@@ -233,29 +232,15 @@ namespace d_f_32.KanColleCacher
             }
         }
 
-        private int _CachePortFiles;
-        public int CachePortFiles
+        private int _CacheCollectionFiles;
+        public int CacheCollectionFiles
         {
-            get { return this._CachePortFiles; }
+            get { return this._CacheCollectionFiles; }
             set
             {
-                if (this._CachePortFiles != value)
+                if (this._CacheCollectionFiles != value)
                 {
-                    this._CachePortFiles = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-        private int _CacheSceneFiles;
-        public int CacheSceneFiles
-        {
-            get { return this._CacheSceneFiles; }
-            set
-            {
-                if (this._CacheSceneFiles != value)
-                {
-                    this._CacheSceneFiles = value;
+                    this._CacheCollectionFiles = value;
                     this.RaisePropertyChanged();
                 }
             }
@@ -291,7 +276,7 @@ namespace d_f_32.KanColleCacher
 
 		private int _CheckFiles;
 		[ExportMetadata("Comment", @"向服务器发送文件验证请求
-; 0 - 不验证；1 - 不验证资源SWF文件；2 - 验证所有SWF文件
+; 0 - 不验证；1 - 不验证资源文件；2 - 验证所有文件
 ; 验证文件可以保证缓存的游戏文件始终是有效可用的，但因为要与服务器通信所以会比不验证花费更长的加载时间")]
 		public int CheckFiles
 		{

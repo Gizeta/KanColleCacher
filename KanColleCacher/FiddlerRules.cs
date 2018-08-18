@@ -41,7 +41,7 @@ namespace d_f_32.KanColleCacher
 
 		static bool _Filter(Session oSession)
 		{
-			return oSession.PathAndQuery.StartsWith("/kcs/");
+			return oSession.PathAndQuery.StartsWith("/kcs2/");
 		}
 
         #region     Fiddler向服务器发送客户端请求前执行的动作
@@ -111,14 +111,20 @@ namespace d_f_32.KanColleCacher
 					oSession.oResponse.headers["Accept-Ranges"] = "bytes";
 					oSession.oResponse.headers.Remove("If-Modified-Since");
 					oSession.oRequest.headers.Remove("If-Modified-Since");
-					if (filepath.EndsWith(".swf"))
-						oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
+                    if (filepath.EndsWith(".json"))
+                        oSession.oResponse.headers["Content-Type"] = "application/json";
+                    else if (filepath.EndsWith(".mp3"))
+                        oSession.oResponse.headers["Content-Type"] = "audio/mpeg";
+                    else if (filepath.EndsWith(".png"))
+                        oSession.oResponse.headers["Content-Type"] = "image/png";
+                    else if (filepath.EndsWith(".woff2"))
+                        oSession.oResponse.headers["Content-Type"] = "application/font-woff2";
 
-					//Debug.WriteLine(oSession.oResponse.headers.ToString());
-					//Debug.WriteLine("");
-					//Debug.WriteLine("CACHR> 【捕获 304】" + oSession.PathAndQuery);
-					//Debug.WriteLine("		" + filepath);
-				}
+                    //Debug.WriteLine(oSession.oResponse.headers.ToString());
+                    //Debug.WriteLine("");
+                    //Debug.WriteLine("CACHR> 【捕获 304】" + oSession.PathAndQuery);
+                    //Debug.WriteLine("		" + filepath);
+                }
 			}
         }
         #endregion
@@ -166,14 +172,16 @@ namespace d_f_32.KanColleCacher
 			oSession.oResponse.headers["Connection"] = "close";
 			oSession.oResponse.headers["Accept-Ranges"] = "bytes";
 			filename.ToLower();
-			if (filename.EndsWith(".swf"))
-				oSession.oResponse.headers["Content-Type"] = "application/x-shockwave-flash";
+			if (filename.EndsWith(".json"))
+				oSession.oResponse.headers["Content-Type"] = "application/json";
 			else if (filename.EndsWith(".mp3"))
 				oSession.oResponse.headers["Content-Type"] = "audio/mpeg";
 			else if (filename.EndsWith(".png"))
 				oSession.oResponse.headers["Content-Type"] = "image/png";
-			
-		}
+            else if (filename.EndsWith(".woff2"))
+                oSession.oResponse.headers["Content-Type"] = "application/font-woff2";
+
+        }
 
 
 

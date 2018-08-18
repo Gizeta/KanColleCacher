@@ -15,30 +15,20 @@ namespace d_f_32.KanColleCacher
         not_file,
         unknown_file,
 
-		game_entry,		//kcs\mainD2.swf
-						//kcs\Core.swf
-
-		entry_large,	//kcs\scenes\TitleMain.swf
-						//kcs\resources\swf\commonAsset.swf
-						//kcs\resources\swf\font.swf
-						//kcs\resources\swf\icons.swf
-
-		port_main,		//kcs\PortMain.swf
-						//kcs\resources\swf\sound_se.swf
-
-        scenes,			//kcs\scenes\
+		game_entry,		//kcs2\js\
 		
-		resources,		//kcs\resources\bgm_p\
-						//kcs\resources\swf\sound_bgm.swf
-						//kcs\resources\swf\sound_b_bgm_*.swf
-						//kcs\resources\swf\map\
-						//kcs\resources\swf\ships\
+		resources,		//kcs2\resources\
 						
-		image,			//kcs\resources\images
-        sound,			//kcs\sound
+		collection,		//kcs2\resources\ship\
+                        //kcs2\resources\slot\
+                        //kcs2\resources\useitem\
+                        //kcs2\resources\furniture\
 
-		world_name,		//kcs\resources\images\world
-		title_call,		//kcs\sound\titlecall
+        sound,			//kcs2\sound
+
+		world_name,		//kcs2\resources\world
+		title_call,		//kcs2\sound\titlecall
+                        //kcs2\resources\voice\
     }
 
 
@@ -87,8 +77,7 @@ namespace d_f_32.KanColleCacher
 			//识别文件类型
 			filetype type = _RecognizeFileType(uri);
 			if (type == filetype.unknown_file ||
-				type == filetype.not_file ||
-				type == filetype.game_entry)
+				type == filetype.not_file)
 			{
 				return Direction.Discharge_Response;
 				//无效的文件，忽略请求
@@ -109,7 +98,7 @@ namespace d_f_32.KanColleCacher
 				}
 				else if (type == filetype.world_name)
 				{
-					filepath = myCacheFolder + @"\kcs\resources\image\world.png";
+					filepath = myCacheFolder + @"\kcs2\resources\world.png";
 					result = filepath;
 
 					if (File.Exists(filepath))
@@ -119,13 +108,11 @@ namespace d_f_32.KanColleCacher
 
 			//检查一般文件地址
 			if ((type == filetype.resources && set.CacheResourceFiles > 0) ||
-				(type == filetype.entry_large && set.CacheEntryFiles > 0) ||
-				(type == filetype.port_main && set.CachePortFiles > 0) ||
-				(type == filetype.scenes && set.CacheSceneFiles > 0) ||
+				(type == filetype.game_entry && set.CacheEntryFiles > 0) ||
+				(type == filetype.collection && set.CacheCollectionFiles > 0) ||
 				(type == filetype.sound && set.CacheSoundFiles > 0) ||
 				((type == filetype.title_call ||
-				  type == filetype.world_name ||
-				  type == filetype.image) && set.CacheResourceFiles > 0))
+				  type == filetype.world_name) && set.CacheResourceFiles > 0))
 			{
 				filepath = myCacheFolder + uri.AbsolutePath.Replace('/', '\\');
 
@@ -151,8 +138,8 @@ namespace d_f_32.KanColleCacher
 					//（验证所有文件 或 只验证非资源文件）
 					if (set.CheckFiles > 1 || (set.CheckFiles > 0 && type != filetype.resources))
 					{
-						//只有swf文件需要验证时间
-						if (filepath.EndsWith(".swf"))
+						//只有png/mp3/json文件需要验证时间
+						if (filepath.EndsWith(".png") || filepath.EndsWith(".mp3") || filepath.EndsWith(".json"))
 						{
 							//文件存在且需要验证时间
 							//-> 请求服务器验证修改时间（记录读取和保存的位置）
@@ -211,7 +198,7 @@ namespace d_f_32.KanColleCacher
 
 			var seg = uri.Segments;
 
-			if (seg[1] != "kcs/")
+			if (seg[1] != "kcs2/")
 			{
 				return filetype.not_file;
 			}
@@ -220,39 +207,19 @@ namespace d_f_32.KanColleCacher
 
 				if (seg[2] == "resources/")
 				{
-					if (seg[3] == "swf/")
+					if (seg[3] == "world/")
 					{
-						if (seg[4] == "commonAssets.swf" ||
-							seg[4] == "font.swf" ||
-							seg[4] == "icons.swf")
-						{
-							return filetype.entry_large;
-						}
-
-						else if (seg[4] == ("sound_se.swf"))
-						{
-							return filetype.port_main;
-						}
+                        return filetype.world_name;
 					}
-					else if (seg[3] == "image/")
+					else if (seg[3] == "voice/")
 					{
-						if (seg[4] == "world/")
-						{
-							return filetype.world_name;
-						}
-
-						return filetype.image;
+                        return filetype.title_call;
 					}
+                    else if (seg[3] == "ship/" || seg[3] == "slot/" || seg[3] == "useitem/" || seg[3] == "furniture/")
+                    {
+                        return filetype.collection;
+                    }
 					return filetype.resources;
-				}
-				else if (seg[2] == "scenes/")
-				{
-					if (seg[3] == "TitleMain.swf")
-					{
-						return filetype.entry_large;
-					}
-
-					return filetype.scenes;
 				}
 				else if (seg[2] == "sound/")
 				{
@@ -263,20 +230,9 @@ namespace d_f_32.KanColleCacher
 
 					return filetype.sound;
 				}
-				else
+				else if (seg[2] == "js/")
 				{
-					if (seg[2] == "Core.swf" ||
-						seg[2] == "mainD2.swf")
-					{
-						return filetype.game_entry;
-						//  kcs/mainD2.swf; kcs/Core.swf;
-					}
-					else if (seg[2] == "PortMain.swf")
-					{
-						return filetype.port_main;
-						//  kcs/PortMain.swf;
-
-					}
+					return filetype.game_entry;
 				}
 				
 				//Debug.WriteLine("CACHR> _RecogniseFileType检查到无法识别的文件");
@@ -298,13 +254,11 @@ namespace d_f_32.KanColleCacher
 		public bool AllowedToSave(filetype type)
 		{
 			return (type == filetype.resources && set.CacheResourceFiles > 1) ||
-					(type == filetype.entry_large && set.CacheEntryFiles > 1) ||
-					(type == filetype.port_main && set.CachePortFiles > 1) ||
-					(type == filetype.scenes && set.CacheSceneFiles > 1) ||
+					(type == filetype.game_entry && set.CacheEntryFiles > 1) ||
+					(type == filetype.collection && set.CacheCollectionFiles > 1) ||
 					(type == filetype.sound && set.CacheSoundFiles > 1) ||
 					(type == filetype.title_call || 
-					type == filetype.world_name ||
-					type == filetype.image) && set.CacheResourceFiles > 1;
+					type == filetype.world_name) && set.CacheResourceFiles > 1;
 		}
 		
 		void _RecordTask(string url, string filepath)

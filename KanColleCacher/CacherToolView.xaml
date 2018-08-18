@@ -133,13 +133,13 @@
             <Setter Property="Background" Value="Azure"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="ToolTip" Value="对所有SWF文件进行更新检查"/>
+                    <Setter Property="ToolTip" Value="对所有文件进行更新检查"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="False">
                     <Setter Property="ToolTip" Value="对任何文件都不进行更新检查"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="ToolTip" Value="仅对资源文件外的SWF文件进行更新检查"/>
+                    <Setter Property="ToolTip" Value="仅对资源文件外的文件进行更新检查"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -224,15 +224,12 @@
                           ToolTip="在GameStart按钮之前载入的文件，这部分文件可能会时常更新"
                           IsChecked="{Binding Current.CacheEntryFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                <CheckBox Content="界面文件"
-                          ToolTip="母港界面的文件，这部分文件同样可能会更新"
+                <CheckBox Content="立绘文件"
+                          ToolTip="包括舰娘、装备、道具、家具等各类资源"
                           IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
-                <CheckBox Content="场景文件"
-                          ToolTip="编成、工厂、商店等界面，不包括地图"
-                          IsChecked="{Binding Current.CacheSceneFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
                 <CheckBox Content="资源文件"
-                          ToolTip="包括立绘、地图、BGM以及各种png图片" 
+                          ToolTip="除立绘文件的各类图片资源（如UI、战斗、海图等）、背景音乐，这部分文件可能会时常更新" 
                           IsChecked="{Binding Current.CacheResourceFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"/>
                 <CheckBox Content="声音文件"
                           ToolTip="主要是舰娘的语音，不包括背景音乐"
@@ -281,9 +278,9 @@
             <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 允许将游戏登陆语音替换为「缓存文件夹\kcs\sound\titlecall\a.mp3, b.mp3, c.mp3」"/>
+                <Run Text="※ 允许将游戏登陆语音替换为「缓存文件夹\kcs2\sound\titlecall\a.mp3, b.mp3, c.mp3」"/>
                 <LineBreak/>
-                <Run Text="　 并替换服务器文字为「缓存文件夹\kcs\resources\image\world.png」"/>
+                <Run Text="　 并替换服务器文字为「缓存文件夹\kcs2\resources\world.png」"/>
             </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
@@ -313,14 +310,15 @@
                 <TextBlock Margin="31,10,0,0" 
                        TextWrapping="Wrap" 
                        Style="{StaticResource DetailTextBlock}">
-                <Run Text="※ 点唱机点歌将不会消耗家具币"/>
+                <Run Text="※ 点唱机点歌将不会消耗家具币，但设定为母港音乐时会向服务器同步数据"/>
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
 
 
             <!--第七区块-->
-            <StackPanel Grid.Row="6">
+            <StackPanel Grid.Row="6" IsEnabled="False">
+                <!--
                 <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
                            Margin="30,10,0,0" 
@@ -340,6 +338,7 @@
                         Content="生成舰娘文件名列表"
                         Click="GenerateFileList_Click"/>
                 <Border Style="{StaticResource BorderStyle}" />
+                -->
             </StackPanel>
 
 

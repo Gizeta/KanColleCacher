@@ -78,9 +78,8 @@ namespace d_f_32.KanColleCacher
         private void CleanCache_Click(object sender, RoutedEventArgs e)
         {
             cleanIECache(new List<string>{
-                "/kcs/",
-                "/gadget/js/",
-                "/gadget/script/",
+                "/kcs2/",
+                "/gadget_html5/",
                 "/kcscontents/"
             });
         }
