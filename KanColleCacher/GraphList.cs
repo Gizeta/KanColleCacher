@@ -11,6 +11,8 @@ using System.IO;
 using Debug = System.Diagnostics.Debug;
 using System.Runtime.Serialization.Json;
 using System.Windows;
+using Nekoxy;
+using Session = Fiddler.Session;
 
 
 namespace d_f_32.KanColleCacher
@@ -132,7 +134,7 @@ namespace d_f_32.KanColleCacher
 		static void ParseSession(Session oSession)
 		{
 			SvData<kcsapi_start2> svd;
-			if (!SvData.TryParse(oSession, out svd))
+			if (!SvData.TryParse(oSession.ToNekoxySession(), out svd))
 			{
 				Log.Warning("GraphList.ParseSession()", "TryParse失败，无效的Session对象！");
 				return;
@@ -334,4 +336,39 @@ namespace d_f_32.KanColleCacher
         public int ship_graph_wedb_left = 0;
         public int ship_graph_wedb_top = 0;
 	}
+
+    public class kcsapi_start2
+    {
+        public kcsapi_mst_ship[] api_mst_ship { get; set; }
+        public Api_Mst_Shipgraph[] api_mst_shipgraph { get; set; }
+        public kcsapi_mst_slotitem_equiptype[] api_mst_slotitem_equiptype { get; set; }
+        public kcsapi_mst_stype[] api_mst_stype { get; set; }
+        public kcsapi_mst_slotitem[] api_mst_slotitem { get; set; }
+        public kcsapi_mst_useitem[] api_mst_useitem { get; set; }
+        public kcsapi_mst_maparea[] api_mst_maparea { get; set; }
+        public kcsapi_mst_mapinfo[] api_mst_mapinfo { get; set; }
+        public kcsapi_mission[] api_mst_mission { get; set; }
+    }
+
+    public class Api_Mst_Shipgraph
+    {
+        public int api_id { get; set; }
+        public int api_sortno { get; set; }
+        public string api_filename { get; set; }
+        public int[] api_boko_n { get; set; }
+        public int[] api_boko_d { get; set; }
+        public int[] api_kaisyu_n { get; set; }
+        public int[] api_kaisyu_d { get; set; }
+        public int[] api_kaizo_n { get; set; }
+        public int[] api_kaizo_d { get; set; }
+        public int[] api_map_n { get; set; }
+        public int[] api_map_d { get; set; }
+        public int[] api_ensyuf_n { get; set; }
+        public int[] api_ensyuf_d { get; set; }
+        public int[] api_ensyue_n { get; set; }
+        public int[] api_battle_n { get; set; }
+        public int[] api_battle_d { get; set; }
+        public int[] api_weda { get; set; }
+        public int[] api_wedb { get; set; }
+    }
 }

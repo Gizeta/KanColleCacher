@@ -4,6 +4,7 @@ using Fiddler;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Gizeta.KanColleCacher
 {
@@ -115,6 +116,19 @@ namespace Gizeta.KanColleCacher
     {
         public static List<ModifyData> Items = new List<ModifyData>();
 
+        private string ToUnicodeString(string s)
+        {
+            char[] charbuffers = s.ToCharArray();
+            byte[] buffer;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < charbuffers.Length; i++)
+            {
+                buffer = System.Text.Encoding.Unicode.GetBytes(charbuffers[i].ToString());
+                sb.Append(string.Format("\\u{0:X2}{1:X2}", buffer[1], buffer[0]));
+            }
+            return sb.ToString();
+    }
+
         internal ModifyData(string path)
         {
             var st = path.LastIndexOf('\\') + 1;
@@ -132,7 +146,7 @@ namespace Gizeta.KanColleCacher
             var parser = ConfigParser.ReadIniFile(path);
             if (parser["info"] != null)
             {
-                this.Data.Add("ship_name", parser["info"]["ship_name"]);
+                this.Data.Add("ship_name", ToUnicodeString(parser["info"]["ship_name"]));
             }
             else
             {

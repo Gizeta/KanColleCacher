@@ -25,7 +25,7 @@ namespace d_f_32.KanColleCacher
         /// </summary>
         public static void Load()
         {
-			filePath = Directory.GetCurrentDirectory() + @"\Plugins\KanColleCacher.ini";
+			filePath = AppDomain.CurrentDomain.BaseDirectory + @"Plugins\KanColleCacher.ini";
 
 			if (!File.Exists(filePath))
 			{
@@ -50,7 +50,7 @@ namespace d_f_32.KanColleCacher
 				}
 				catch (Exception ex)
 				{
-					Current.CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
+					Current.CacheFolder = AppDomain.CurrentDomain.BaseDirectory + @"MyCache";
 					Log.Exception(ex.InnerException, ex, "设置文件中CacheFolder不存在，试图创建时发生异常");
 				}
 			}
@@ -110,7 +110,7 @@ namespace d_f_32.KanColleCacher
         
         public Settings ()
         {       
-                _CacheFolder = Directory.GetCurrentDirectory() + @"\MyCache";
+                _CacheFolder = AppDomain.CurrentDomain.BaseDirectory + @"MyCache";
                 _CacheEnabled = true;
                 _HackEnabled = true;
                 _HackTitleEnabled = true;
