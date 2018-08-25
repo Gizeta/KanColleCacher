@@ -149,6 +149,7 @@ namespace d_f_32.KanColleCacher
 					//保存下载文件并记录Modified-Time
 					try
 					{
+                        oSession.utilDecodeResponse();
 						oSession.SaveResponseBody(filepath);
 						//cache.RecordNewModifiedTime(oSession.fullUrl,
 						//	oSession.oResponse.headers["Last-Modified"]);

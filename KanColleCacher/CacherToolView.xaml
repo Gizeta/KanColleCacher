@@ -139,7 +139,7 @@
                     <Setter Property="ToolTip" Value="对任何文件都不进行更新检查"/>
                 </Trigger>
                 <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="ToolTip" Value="仅对资源文件外的文件进行更新检查"/>
+                    <Setter Property="ToolTip" Value="仅对立绘、声音文件外的文件进行更新检查"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -153,8 +153,6 @@
 		VerticalScrollBarVisibility="Auto" Margin="5">
         <Grid Height="Auto">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -226,7 +224,7 @@
                           />
                 <CheckBox Content="立绘文件"
                           ToolTip="包括舰娘、装备、道具、家具等各类资源"
-                          IsChecked="{Binding Current.CachePortFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
+                          IsChecked="{Binding Current.CacheCollectionFiles, Converter={StaticResource ThreeStateConverter},Mode=TwoWay}"
                           />
                 <CheckBox Content="资源文件"
                           ToolTip="除立绘文件的各类图片资源（如UI、战斗、海图等）、背景音乐，这部分文件可能会时常更新" 
@@ -314,57 +312,6 @@
                 </TextBlock>
                 <Border Style="{StaticResource BorderStyle}" />
             </StackPanel>
-
-
-            <!--第七区块-->
-            <StackPanel Grid.Row="6" IsEnabled="False">
-                <!--
-                <Label Content="舰娘文件名列表" Margin="10,10,0,0" Padding="0" Foreground="White"/>
-                <TextBlock TextWrapping="Wrap"
-                           Margin="30,10,0,0" 
-                           Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ 每一个舰娘都有对应的文件名。例如，加贺改的文件名为 uuqdlbtrkmvk，"/>
-                    <LineBreak/>
-                    <Run Text="　 立绘文件为「kcs\resources\swf\ships\uuqdlbtrkmvk.swf」，"/>
-                    <LineBreak/>
-                    <Run Text="　 语音文件为「kcs\sound\kcuuqdlbtrkmvk\1.mp3」等。"/>
-                    <LineBreak/>
-                    <Run Text="　 点击下面的按钮以在缓存文件夹中生成一个包含所有舰娘文件名的TXT文档。"/>
-                </TextBlock>
-                <Button Margin="30,10,0,0"
-                        Padding="10,3"
-                        HorizontalAlignment="Left"
-                        IsEnabled="{Binding IsChecked, ElementName=CheckBox_SaveApiStart2}"
-                        Content="生成舰娘文件名列表"
-                        Click="GenerateFileList_Click"/>
-                <Border Style="{StaticResource BorderStyle}" />
-                -->
-            </StackPanel>
-
-
-            <!--第八区块-->
-            <StackPanel Grid.Row="7">
-                <Label Content="清除缓存" Margin="10,10,0,0" Padding="0" Foreground="White"/>
-                <TextBlock TextWrapping="Wrap"
-                           Margin="30,10,0,0" 
-                           Style="{StaticResource DetailTextBlock}">
-                    <Run Text="※ 清除魔改缓存将只会清除符合Hack规则的资源缓存"/>
-                </TextBlock>
-                <StackPanel Orientation="Horizontal">
-                    <Button Margin="30,10,0,0"
-                        Padding="10,3"
-                        HorizontalAlignment="Left"
-                        Content="清除魔改缓存"
-                        Click="CleanModifiedCache_Click"/>
-                    <Button Margin="50,10,0,0"
-                        Padding="10,3"
-                        HorizontalAlignment="Left"
-                        Content="清除全部缓存"
-                        Click="CleanCache_Click"/>
-                </StackPanel>
-                <Border Style="{StaticResource BorderStyle}" />
-            </StackPanel>
-            
         </Grid>        
     </ScrollViewer>
 </UserControl>

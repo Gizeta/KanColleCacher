@@ -276,7 +276,7 @@ namespace d_f_32.KanColleCacher
 
 		private int _CheckFiles;
 		[ExportMetadata("Comment", @"向服务器发送文件验证请求
-; 0 - 不验证；1 - 不验证资源文件；2 - 验证所有文件
+; 0 - 不验证；1 - 不验证立绘、声音文件；2 - 验证所有文件
 ; 验证文件可以保证缓存的游戏文件始终是有效可用的，但因为要与服务器通信所以会比不验证花费更长的加载时间")]
 		public int CheckFiles
 		{

@@ -30,7 +30,7 @@ namespace Gizeta.KanColleCacher
         {
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
 
-            KanColleClient.Current.Proxy.api_start2.TryParse<kcsapi_start2>().Subscribe(x => initData = x.Data);
+            KanColleClient.Current.Proxy.api_start2_getData.TryParse<kcsapi_start2>().Subscribe(x => initData = x.Data);
             KanColleClient.Current.Proxy.api_get_member_basic.TryParse<kcsapi_basic>().Subscribe(x => fcoin = x.Data.api_fcoin);
 
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Plugins\picture_book_ext.dat"))

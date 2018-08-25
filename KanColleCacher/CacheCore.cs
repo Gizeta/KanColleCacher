@@ -134,19 +134,24 @@ namespace d_f_32.KanColleCacher
 				//检查缓存文件
 				if (File.Exists(filepath))
 				{
-					//存在本地缓存文件 -> 检查文件的最后修改时间
-					//（验证所有文件 或 只验证非资源文件）
-					if (set.CheckFiles > 1 || (set.CheckFiles > 0 && type != filetype.resources))
+                    //存在本地缓存文件 -> 检查文件的最后修改时间
+                    //验证所有文件
+                    if (set.CheckFiles > 1)
+                    {
+                        //文件存在且需要验证时间
+                        //-> 请求服务器验证修改时间（记录读取和保存的位置）
+                        result = filepath;
+                        _RecordTask(url, filepath);
+                        return Direction.Verify_LocalFile;
+                    }
+                    //只验证非立绘、声音文件
+                    if (set.CheckFiles > 0 && type != filetype.collection && type != filetype.resources)
 					{
-						//只有png/mp3/json文件需要验证时间
-						if (filepath.EndsWith(".png") || filepath.EndsWith(".mp3") || filepath.EndsWith(".json"))
-						{
-							//文件存在且需要验证时间
-							//-> 请求服务器验证修改时间（记录读取和保存的位置）
-							result = filepath;
-							_RecordTask(url, filepath);
-							return Direction.Verify_LocalFile;
-						}
+						//文件存在且需要验证时间
+						//-> 请求服务器验证修改时间（记录读取和保存的位置）
+						result = filepath;
+						_RecordTask(url, filepath);
+						return Direction.Verify_LocalFile;
 
 						////检查文件时间
 						//int i = VersionChecker.GetFileLastTime(uri, out result);
